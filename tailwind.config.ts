@@ -27,7 +27,16 @@ export default {
   		},
 		  listStyleType: {
 			circle: 'circle',
-		  }
+		  },
+		  screens: {
+		'xs': '480px'
+		},
+		container: {
+			center: true
+		},
+		animation: {
+			"spin-slow": "spin 20s linear infinite",
+		  },
   	}
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports

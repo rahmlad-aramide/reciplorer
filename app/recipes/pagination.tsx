@@ -35,7 +35,7 @@ export function TablePagination<TData>({
         [totalRows]
       );
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex flex-col xs:flex-row gap-2 items-center justify-between px-2">
       <div className="flex text-sm text-muted-foreground">
         Showing {selectedCount} of {" "}
         {totalCount}.

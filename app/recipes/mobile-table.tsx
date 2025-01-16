@@ -31,7 +31,7 @@ export const MobileTable = <TData,>({
         <Link
           href={getLinkHref(row)}
           key={getRowKey(row)}
-          className="p-4 border-b-2 flex gap-2 cursor-pointer hover:opacity-80 active:opacity-100 transition duration-200"
+          className="py-4 md:px-4 border-b-2 flex gap-2 cursor-pointer hover:opacity-80 active:opacity-100 transition duration-200"
         >
           <div className="flex w-full">
             <div className="flex mr-4 w-20">

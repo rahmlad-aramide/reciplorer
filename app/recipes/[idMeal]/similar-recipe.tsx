@@ -3,6 +3,7 @@ import { getSimilarCategories } from "../data";
 import { useEffect, useState } from "react";
 import { SimilarRecipeTable } from "./similar-recipe-table";
 import { columns } from "./columns";
+import { SimilarRecipeTableSkeleton } from "./skeletons";
 
 export function SimilarRecipe ({category}: {category: string}) {
     const [data, setData] = useState<ISimilarCategory[]>([])
@@ -27,16 +28,18 @@ export function SimilarRecipe ({category}: {category: string}) {
       }, [category]);
 
     return (
-        <section className="container mx-auto bg-white p-5 mt-4 rounded-lg">
+        <section className="sm:container mx-auto bg-white p-4 mt-4 rounded-lg">
             <div className="flex justify-between">
-            <h2 className="text-xl/normal font-semibold">Similar Recipes</h2>
+            <h2 className="text-xl/normal font-semibold text-neutral-800">Similar Recipes</h2>
             </div>
             {isLoading ? (
-            <div>Loading...</div>
+            <SimilarRecipeTableSkeleton  />
             ) : error ? (
             <div>{error}</div>
             ) : (
-            <SimilarRecipeTable columns={columns} data={data} />
+              <>
+                <SimilarRecipeTable columns={columns} data={data} />
+              </>
             )}
       </section>
     )

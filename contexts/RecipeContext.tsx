@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import { IRecipe } from "@/types";
 import { saveRecipeToSessionStorage } from "@/lib/helper";
 
-// Define the shape of the context
 interface RecipeContextType {
   recipes: IRecipe[];
   setRecipes: React.Dispatch<React.SetStateAction<IRecipe[]>>;
@@ -13,11 +12,7 @@ interface RecipeContextType {
 const RecipeContext = createContext<RecipeContextType | undefined>(undefined);
 
 export const RecipeProvider = ({ children }: { children: ReactNode }) => {
-  const [recipes, setRecipes] = useState<IRecipe[]>([ ]);
-
-  // const addRecipe = (recipe: IRecipe) => {
-  //   setRecipes((prevRecipes) => [...prevRecipes, recipe]);
-  // };
+  const [recipes, setRecipes] = useState<IRecipe[]>([]);
 
   const addRecipe = (recipe: IRecipe) => {
     setRecipes((prevRecipes) => {
@@ -34,7 +29,6 @@ export const RecipeProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook to use the RecipeContext
 export const useRecipeContext = () => {
   const context = useContext(RecipeContext);
   if (!context) {

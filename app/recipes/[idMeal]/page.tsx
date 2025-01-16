@@ -5,6 +5,7 @@ import { IRecipe } from "@/types";
 import { getRecipeByIdFromSessionStorage } from "@/lib/helper";
 import { RecipeDetail } from "./recipe-detail";
 import { useParams } from "next/navigation";
+import { RecipeDetailSkeleton } from "./skeletons";
 
 export default function RecipeDetails() {
   const params = useParams<{idMeal: string}>();
@@ -44,15 +45,17 @@ export default function RecipeDetails() {
 
   return (
     <main className="py-10 bg-neutral-100 font-[family-name:var(--font-geist-sans)]">
-      <section className="container mx-auto p-5 mt-5 rounded-lg">
+      <section className="sm:container mx-auto p-4 sm:p-5 mt-7 rounded-lg">
         {isLoading ? (
-          <div>Loading...</div>
+          <RecipeDetailSkeleton />
         ) : error ? (
           <div>{error}</div>
         ) : !data ? (
           <div>Recipe not found.</div>
         ) : (
-          <RecipeDetail recipe={data} />
+          <>
+            <RecipeDetail recipe={data} />
+          </>
         )}
       </section>
     </main>

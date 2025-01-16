@@ -8,7 +8,7 @@ export default function AddRecipe () {
     const { addRecipe } = useRecipeContext();
     return (
         <main className="py-10 font-[family-name:var(--font-geist-sans)]">
-            <section className="container mx-auto bg-white p-5 md:px-10 lg:px-20 mt-10 rounded-lg">
+            <section className="sm:container mx-auto bg-white p-5 md:px-10 lg:px-20 mt-10 rounded-lg">
                 <div className="flex gap-1 md:col-span-2 mb-2">
                     <Link
                         href={"/recipes"}

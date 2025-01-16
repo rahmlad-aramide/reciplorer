@@ -3,6 +3,7 @@ import { DropdownFilter } from "./dropdown-filter";
 import { ColumnFiltersState } from "@tanstack/react-table";
 import { getAreas, getCategories } from "./data";
 import { IArea, ICategory } from "@/types";
+import { DropdownFilterSkeleton } from "./skeletons";
 
 type DropdownFiltersProps = {
   setColumnFilters: Dispatch<SetStateAction<ColumnFiltersState>>;
@@ -69,7 +70,10 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
   return (
     <>
       {isLoading ? (
-        <div>Loading filters...</div>
+        <>
+            <DropdownFilterSkeleton />
+            <DropdownFilterSkeleton />
+        </>
       ) : error ? (
         <div>Error loading filters, try later.</div>
       ) : (

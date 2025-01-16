@@ -40,7 +40,7 @@ export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
             />
           </div>
           {/* Recipe Details */}
-          <div className="flex flex-col px-4 gap-3 md:gap-6 bg-white rounded-lg">
+          <div className="flex flex-col md:px-4 gap-3 md:gap-6 bg-white rounded-lg">
             <div className="flex justify-between">
               <h3 className="text-neutral-400 text-lg font-medium">
                 Meal Name:

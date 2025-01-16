@@ -152,18 +152,18 @@ const RecipeForm = ({ onAddRecipe }: { onAddRecipe: (recipe: IRecipe) => void })
         <DrawerTrigger />
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle className="text-xl my-2 text-neutral-800">
+            <DrawerTitle className="text-xl my-2 text-neutral-800 text-center">
               <div className="flex justify-center">
                 <SuccessIcon />
               </div>
                   Success!!!
             </DrawerTitle>
-            <DrawerDescription className="text-base">
+            <DrawerDescription className="text-base text-center">
             <p>Recipe was added successfully.</p>
               What would you like to do next?
             </DrawerDescription>
           </DrawerHeader>
-          <DrawerFooter>
+          <DrawerFooter className="max-w-md w-full mx-auto">
             <Button onClick={handleAddAnother} variant="secondary" size={'lg'}>
               Add Another Recipe
             </Button>
