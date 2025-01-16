@@ -1,16 +1,14 @@
 "use client";
-import { Usable, use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getSingleData } from "../data";
 import { IRecipe } from "@/types";
 import { getRecipeByIdFromSessionStorage } from "@/lib/helper";
 import { RecipeDetail } from "./recipe-detail";
+import { useParams } from "next/navigation";
 
-export default function RecipeDetails({
-  params,
-}: {
-  params: Usable<{ idMeal: string }>;
-}) {
-  const { idMeal } = use<{ idMeal: string }>(params);
+export default function RecipeDetails() {
+  const params = useParams<{idMeal: string}>();
+  const { idMeal } = params;
 
   const [data, setData] = useState<IRecipe | null>(null);
   const [isLoading, setIsLoading] = useState(true);
