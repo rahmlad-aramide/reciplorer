@@ -6,26 +6,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type DropdownFilterProps = {
-    options: string[];
+type DropdownFilterProps <T extends { value: string }> = {
+    options: T[];
     placeholder: string; 
     onFilterChange: (value: string) => void; 
   };
   
- export const DropdownFilter: React.FC<DropdownFilterProps> = ({
-    options,
-    placeholder,
-    onFilterChange,
-  }) => {
+ export const DropdownFilter = <T extends { value: string }>({
+  options,
+  placeholder,
+  onFilterChange,
+}: DropdownFilterProps<T>): React.ReactElement => {
     return (
       <Select onValueChange={onFilterChange}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
-          {options.map((option) => (
-            <SelectItem key={option} value={option}>
-              {option}
+          {options.map((option, index) => (
+            <SelectItem key={index} value={option.value}>
+              {option.value}
             </SelectItem>
           ))}
         </SelectContent>

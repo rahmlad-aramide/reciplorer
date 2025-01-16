@@ -4,48 +4,17 @@ import { VideoEmbed } from "./video-embed";
 import { IRecipe } from "@/types";
 import placeholderImage from "@/assets/placeholder.png";
 import { ChevronLeft } from "lucide-react";
+import { Tags } from "../tags";
+import { FormatInstructions } from "./format-instructions";
+import { getIngredientsWithMeasurements } from "@/lib/helper";
+import { SimilarRecipe } from "./similar-recipe";
 
 export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
-  const ingredients = Object.keys(recipe)
-    // @ts-expect-error formatted string
-    .filter((key) => key.startsWith("strIngredient") && recipe[key])
-    .map((key) => {
-      const measurementKey = key.replace("strIngredient", "strMeasure");
-      // @ts-expect-error formatted string
-      return `${recipe[key]} - ${recipe[measurementKey]}`;
-    });
-
-  const formatInstructions = (instructions: string) => {
-    if (!instructions)
-      return (
-        <p className="text-neutral-800 mt-2">No instruction(s) available</p>
-      ); // Handle empty instructions
-
-    // Split and clean the instructions
-    const steps = instructions
-      .split("\r\n") // Split by line breaks
-      .map((line) => line.trim()) // Remove extra spaces
-      .filter((line) => line !== ""); // Remove empty lines
-
-    // Map each line into JSX
-    return steps.map((step, index) => {
-      const isStep =
-        step.toUpperCase().startsWith("STEP") ||
-        step.toUpperCase().startsWith("NSTEP");
-      return isStep ? (
-        <h5 key={index} className="text-neutral-400 mt-2">
-          {step}
-        </h5>
-      ) : (
-        <p key={index} className="text-neutral-800 text-sm">
-          {step}
-        </p>
-      );
-    });
-  };
+    //@ts-expect-error passing recipe as an object
+  const ingredients = getIngredientsWithMeasurements(recipe)
 
   return (
-    <div className="">
+    <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 bg-white p-5 rounded-lg">
           <div className="flex gap-1 md:col-span-2">
@@ -71,7 +40,7 @@ export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
             />
           </div>
           {/* Recipe Details */}
-          <div className="flex flex-col px-4 gap-6 bg-white rounded-lg">
+          <div className="flex flex-col px-4 gap-3 md:gap-6 bg-white rounded-lg">
             <div className="flex justify-between">
               <h3 className="text-neutral-400 text-lg font-medium">
                 Meal Name:
@@ -87,6 +56,10 @@ export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
             <div className="flex justify-between">
               <h3 className="text-neutral-400 text-lg font-medium">Area:</h3>
               <p className="text-neutral-800">{recipe.strArea}</p>
+            </div>
+            <div className="flex justify-between">
+              <h3 className="text-neutral-400 text-lg font-medium">Tags:</h3>
+              <div><Tags tags={recipe.strTags || 'null'} /></div>
             </div>
             {/* Ingredient measurement */}
             <div>
@@ -109,7 +82,7 @@ export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
         <div className="col-span-2 lg:col-span-1 bg-white rounded-lg p-5">
           <h2 className="text-neutral-400 font-medium text-xl">Instructions</h2>
           <div className="flex flex-col gap-2">
-            {formatInstructions(recipe.strInstructions)}
+            <FormatInstructions instructions={(recipe.strInstructions)} />
           </div>
         </div>
         {/* Video Tutorial */}
@@ -132,6 +105,7 @@ export const RecipeDetail = ({ recipe }: { recipe: IRecipe }) => {
           </div>
         )}
       </div>
-    </div>
+      <SimilarRecipe category={recipe.strCategory} />
+    </>
   );
 };

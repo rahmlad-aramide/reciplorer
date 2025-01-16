@@ -64,10 +64,19 @@ export interface IRecipes {
   export interface ICategory {
     strCategory: string
   }
-  export interface IArea {
+  export interface IAreas {
     meals: IArea[]
   }
   export interface IArea {
     strArea: string
   }
   
+  export interface ISimilarCategories {
+    meals: ISimilarCategory[];
+}
+
+export interface ISimilarCategory {
+    strMeal:      string;
+    strMealThumb: string;
+    idMeal:       string;
+}

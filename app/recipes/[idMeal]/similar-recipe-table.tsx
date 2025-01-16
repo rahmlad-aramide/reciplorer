@@ -12,26 +12,24 @@ import {
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { TablePagination } from "./pagination";
+import { TablePagination } from "./../pagination";
+import { Search } from "lucide-react";
+import { DesktopTable } from "./../desktop-table";
 import placeholderImage from "@/assets/placeholder.png";
-import { Filter, FilterX, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { DropdownFilters } from "./dropdown-filters";
-import { DesktopTable } from "./desktop-table";
-import { MobileTable } from "./mobile-table";
+import Image from "next/image";
+// import Link from "next/link";
 
 interface RecipeTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function RecipeTable<TData, TValue>({
+export function SimilarRecipeTable<TData, TValue>({
   columns,
   data,
 }: RecipeTableProps<TData, TValue>) {
   const [sorting, setSortByName] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [openFilter, setOpenFilter] = useState(false);
 
   const table = useReactTable({
     data,
@@ -68,41 +66,29 @@ export function RecipeTable<TData, TValue>({
               className="absolute left-2 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"
             />
           </div>
-          <div className="flex gap-4">
-            <Button
-              variant={"outline"}
-              size={"lg"}
-              onClick={() => setOpenFilter(!openFilter)}
-              className="flex md:hidden text-neutral-800 px-4"
-            >
-              {openFilter ? <FilterX /> : <Filter />}
-            </Button>
-            <div className="hidden md:flex gap-4">
-              <DropdownFilters setColumnFilters={setColumnFilters} />
-            </div>
-          </div>
         </div>
-        {openFilter && (
-          <div className="flex md:hidden gap-4">
-            <DropdownFilters setColumnFilters={setColumnFilters} />
-          </div>
-        )}
 
         <div className="hidden md:flex mt-4">
           <DesktopTable columns={columns} table={table} />
         </div>
-        <div className="flex md:hidden mt-4">
+        <div className="grid grid-cols-2 gap-5 md:hidden mt-4">
           {/* Mobile table */}
-          <MobileTable 
-            rows={table.getRowModel().rows}
-            getRowKey={(row) => row.id}
-            getLinkHref={(row) => `/recipes/${row.getValue("idMeal")}`}
-            getThumbnail={(row) => row.getValue("strMealThumb") || placeholderImage}
-            getName={(row) => row.getValue("strMeal")}
-            getCategory={(row) => row.getValue("strCategory")}
-            getArea={(row) => row.getValue("strArea")}
-            getTags={(row) => row.getValue("strTags") || null}
-          />
+              {table.getRowModel().rows.map((row, idx)=> (
+                <div key={idx} className="bg-white rounded-lg shadow-md">
+                    <div className="flex">
+                        <Image
+                            src={row.getValue("strMealThumb") || placeholderImage}
+                            alt={row.getValue("strMeal") || "Reciplorer Logo"}
+                            width={700}
+                            height={700}
+                            className="w-full h-full max-w-[700px] max-h-[700px] border rounded-t-lg"
+                    />
+                    </div>
+                    <p className="text-xl font-semibold p-3">{row.getValue("strMeal")}</p>
+                    {/* <p className="text-xl font-semibold p-3">{row.getValue("strMeal")}</p> */}
+                    {/* <Link href={row.getValue(`/recipes/${row.getValue("idMeal")}`)}>View Details</Link> */}
+                </div>
+              ))}
         </div>
       </div>
       <div className="mt-4">

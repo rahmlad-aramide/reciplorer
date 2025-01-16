@@ -5,26 +5,9 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import Image from "next/image";
 import placeholderImage from '@/assets/placeholder.png';
+import { Tags } from "./tags";
 
 export const columns: ColumnDef<IRecipe>[] = [
-  // {
-  //   accessorKey: "index",
-  //   cell: ({ row }) => {
-  //     return <div>{row.index + 1}</div>;
-  //   },
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         size={"xs"}
-  //         variant="link"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         S/N
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     );
-  //   },
-  // },
   {
     accessorKey: 'idMeal',
     header: () => null,
@@ -49,7 +32,7 @@ export const columns: ColumnDef<IRecipe>[] = [
           className="flex items-center"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Recipe Name
+          Meal
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -104,20 +87,9 @@ export const columns: ColumnDef<IRecipe>[] = [
     },
     cell: ({ row }) => {
       const tagString = row.getValue<string | null>("strTags");
-      // Split the comma separated string into an array
-      const tags = !tagString ? ['No tag'] : tagString.split(",");
 
       return (
-        <div className="">
-          {tags?.map((tag, index) => (
-            <span
-              key={index}
-              className="inline-block bg-blue-100 rounded-full px-2 py-1 text-blue-700 text-xs font-medium mr-1"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        <Tags tags={tagString} />
       );
     },
   },

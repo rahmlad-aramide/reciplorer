@@ -5,7 +5,7 @@ import { ShoppingBasket, UserRound } from "lucide-react";
 
 export const Navbar = () => {
     return (
-        <header className="shadow fixed w-full bg-white z-50 h-20 flex my-auto">
+        <header className="shadow fixed top-0 w-full bg-white z-50 h-20 flex my-auto">
             <nav className="container mx-auto my-auto px-5 py-3 font-[family-name:var(--font-geist-sans)]">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -20,7 +20,7 @@ export const Navbar = () => {
                     </div>
                     <div className="flex items-center text-sm sm:text-xl/normal gap-[50px]">
                         <Link href="/" className="hidden md:flex transition duration-200 hover:scale-110"><UserRound /></Link>
-                        <Link href={'/recipes/new'} className="flex md:hidden justify-center items-center bg-secondary text-white shadow-sm hover:bg-secondary/80 gap-1 rounded-md px-4 h-9 transition duration-200 leading-none">
+                        <Link href={'/recipes'} className="flex md:hidden justify-center items-center bg-secondary text-white shadow-sm hover:bg-secondary/80 gap-1 rounded-md px-4 h-9 transition duration-200 leading-none">
                             <ShoppingBasket size={20} />
                             Explore
                         </Link>

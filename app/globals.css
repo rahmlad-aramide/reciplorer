@@ -11,3 +11,8 @@ body {
     --radius: 0.5rem;
   }
 }
+
+main {
+  height: 100%;
+  min-height: 100dvh;
+}

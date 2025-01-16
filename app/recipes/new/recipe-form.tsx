@@ -142,7 +142,7 @@ const RecipeForm = ({ onAddRecipe }: { onAddRecipe: (recipe: IRecipe) => void })
             )}
           />
           <div>
-            <Button type="submit" variant="secondary" className="mt-4 w-full">
+            <Button type="submit" variant="secondary" size={'lg'} className="mt-4 w-full">
               Submit <ArrowRight />
             </Button>
           </div>
@@ -164,7 +164,7 @@ const RecipeForm = ({ onAddRecipe }: { onAddRecipe: (recipe: IRecipe) => void })
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            <Button onClick={handleAddAnother} variant="secondary">
+            <Button onClick={handleAddAnother} variant="secondary" size={'lg'}>
               Add Another Recipe
             </Button>
             <DrawerClose asChild>

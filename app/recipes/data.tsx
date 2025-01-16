@@ -1,4 +1,4 @@
-import { IRecipe } from "@/types";
+import { IArea, ICategory, IRecipe, ISimilarCategory } from "@/types";
 
 export async function getData1(): Promise<IRecipe[]> {
   try {
@@ -1538,3 +1538,55 @@ export async function getSingleData1(idMeal: string): Promise<IRecipe> {
     }
 }
 
+export async function getCategories(): Promise<ICategory[]> {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    if (data.meals) { 
+      return data.meals; 
+    } else {
+      throw new Error('Invalid API response: Missing "meals" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; 
+  }
+}
+export async function getAreas(): Promise<IArea[]> {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    if (data.meals) { 
+      return data.meals; 
+    } else {
+      throw new Error('Invalid API response: Missing "meals" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; 
+  }
+}
+
+export async function getSimilarCategories(category: string): Promise<ISimilarCategory[]> {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    if (data.meals) { 
+      return data.meals; 
+    } else {
+      throw new Error('Invalid API response: Missing "meals" property.');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error; 
+  }
+}
