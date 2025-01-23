@@ -14,7 +14,7 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
 }) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [areas, setAreas] = useState<IArea[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   // const categories1 = ["All", "Seafood", "Side", "Beef"];
   // const areas1 = ["All", "American", "British", "Canadian"];
@@ -64,9 +64,9 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, []);
+
   return (
     <>
       {isLoading ? (
