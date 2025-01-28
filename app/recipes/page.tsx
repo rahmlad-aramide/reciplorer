@@ -42,7 +42,7 @@ export default function Recipes() {
           <div className="flex justify-between">
             <div className="flex gap-1 items-center"> 
               <Link
-                href={"/recipes"}
+                href={"/"}
                 className="flex justify-center items-center hover:scale-110 transition duration-200"
               >
                 <ChevronLeft size={22} color="#292D32" />
