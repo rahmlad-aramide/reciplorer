@@ -2,7 +2,12 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Monorepo Structure](#monorepo-structure)
 - [Setup and Installation](#setup-and-installation)
+  - [Frontend](#frontend)
+  - [Backend (Coming Soon)](#backend-coming-soon)
+- [Contributing](#contributing)
+- [License](#license)
 - [Design Decisions and Trade-offs](#design-decisions-and-trade-offs)
 - [Known Limitations](#known-limitations)
 
@@ -15,6 +20,22 @@ GitHub Repository: [https://github.com/rahmlad-aramide/reciplorer](https://githu
 
 ---
 
+## Monorepo Structure
+Reciplorer follows a **monorepo** structure, with separate folders for the **frontend** and **backend**:
+
+```
+reciplorer/
+│── frontend/    # Frontend application (React, Next.js, or other framework)
+│── backend/     # Backend API (To be added)
+│── package.json
+│── README.md
+│── CONTRIBUTING.md
+│── LICENSE
+│── .gitignore
+```
+
+---
+
 ## Setup and Installation
 
 ### Prerequisites
@@ -22,65 +43,66 @@ Before you begin, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 16 or higher recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) for package management
 
-### Installation Steps
+### Frontend
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/rahmlad-aramide/reciplorer.git
    cd reciplorer
    ```
 
-2. Install dependencies:
+2. Navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+
+3. Install dependencies:
    ```bash
    npm install
    # or
    yarn install
    ```
 
-3. Start the development server:
+4. Start the development server:
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-4. Access the application:
+5. Access the application:
    Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
----
-
-## Design Decisions and Trade-offs
-
-### Key Design Decisions
-1. **Technology Stack**:
-   - **Next.js** was chosen for its built-in routing, perfomance and optimization, and SEO benefits.
-   - **Tailwind CSS** was used for fast and consistent UI styling.
-   - **shadcn UI library** was incorporated to accelerate UI development, ensuring the interface is intuitive, responsive, and easy to extend.
-   
-2. **State Management**:
-   - **React Context API** was used for managing global state. This choice simplifies state management as the application doesn't deal with highly complex states.
-
-3. **Responsive Design**:
-   - The application is fully responsive, ensuring a great user experience on both desktop and mobile devices.
-
-4. **Component Reusability**:
-   - The app uses a modular, component-based architecture to ensure scalability and maintainability.
-
-### Trade-offs
-
-1. **Feature Prioritization**:
-   - The project prioritizes delivering essential features (e.g., recipe search and filtering) over advanced capabilities like internationalization.
+### Backend (Coming Soon)
+The backend setup guide will be updated once it's implemented.
 
 ---
 
-## Known Limitations
-
-1. **Browser Support**:
-   - The application has been tested on modern browsers (Chrome, Firefox, Safari) and may not work optimally on older versions of Internet Explorer.
-
-2. **Lack of Internationalization**:
-   - The application currently supports only English.
-
-3. **Minimal Error Handling**:
-   - Some error scenarios (e.g., network failures) are handled minimally and may require further enhancements.
+## Contributing
+We welcome contributions to Reciplorer! Please check the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.
 
 ---
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Happy coding! 🎉
+
+---
+
+
+---
+
+### Additional Necessary Files:
+1. **`.gitignore`** (to prevent unnecessary files from being committed)
+   ```gitignore
+   node_modules/
+   .env
+   .DS_Store
+   dist/
+   build/
+   coverage/
+   ```
+
