@@ -91,18 +91,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Happy coding! 🎉
 
 ---
-
-
----
-
-### Additional Necessary Files:
-1. **`.gitignore`** (to prevent unnecessary files from being committed)
-   ```gitignore
-   node_modules/
-   .env
-   .DS_Store
-   dist/
-   build/
-   coverage/
-   ```
-
