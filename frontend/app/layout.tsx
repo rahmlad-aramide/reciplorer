@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from 'next/font/local';
 import "./globals.css";
 import { RecipeProvider } from "@/contexts/RecipeContext";
+import { UserProvider } from "@/context/UserContext";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -43,11 +44,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${aloeVeraBold.variable} antialiased`}
       >
-        <RecipeProvider>  
-          <Navbar />
-          <>{children}</>
-          <Toaster />
-        </RecipeProvider>
+        <UserProvider>
+          <RecipeProvider>
+            <Navbar />
+            <>{children}</>
+            <Toaster />
+          </RecipeProvider>
+        </UserProvider>
       </body>
     </html>
   );

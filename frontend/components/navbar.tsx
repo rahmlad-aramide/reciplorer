@@ -2,11 +2,20 @@
 import Link from "next/link";
 import logo from "@/assets/placeholder.png";
 import Image from "next/image";
-import { ShoppingBasket, UserRound } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { ShoppingBasket, UserRound, ShoppingCart, LayoutDashboard, Calendar, LogOut } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 export const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout } = useUser();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
   return (
     <header className="shadow fixed top-0 w-full bg-white z-50 h-20 flex my-auto">
       <nav
@@ -30,7 +39,7 @@ export const Navbar = () => {
               Reciplorer
             </Link>
           </div>
-          <div className="hidden md:flex items-center text-xl/normal gap-[50px]">
+          <div className="hidden md:flex items-center text-sm/normal gap-[20px]">
             <Link href="/" className="hover:underline underline-offset-2">
               Home
             </Link>
@@ -40,14 +49,50 @@ export const Navbar = () => {
             >
               Recipes
             </Link>
+            {user ? (
+              <>
+                <Link href="/shopping-list" className="hover:underline flex items-center gap-1">
+                  <ShoppingCart size={16} /> List
+                </Link>
+                <Link href="/pantry" className="hover:underline flex items-center gap-1">
+                  <LayoutDashboard size={16} /> Pantry
+                </Link>
+                <Link href="/meal-planner" className="hover:underline flex items-center gap-1">
+                  <Calendar size={16} /> Plans
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="hover:underline underline-offset-2">
+                  Sign In
+                </Link>
+                <Link href="/register" className="bg-secondary text-white px-3 py-1 rounded-md hover:bg-secondary/80">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
           <div className="flex items-center text-sm sm:text-xl/normal gap-[50px]">
-            <Link
-              href="/"
-              className="hidden md:flex transition duration-200 hover:scale-110"
-            >
-              <UserRound />
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/profile"
+                  className="hidden md:flex transition duration-200 hover:scale-110"
+                >
+                  <UserRound />
+                </Link>
+                <button onClick={handleLogout} className="text-red-500 hover:text-red-700 transition duration-200">
+                  <LogOut />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:flex transition duration-200 hover:scale-110"
+              >
+                <UserRound />
+              </Link>
+            )}
             <Link
               href={"/recipes"}
               className="flex md:hidden justify-center items-center bg-secondary text-white shadow-sm hover:bg-secondary/80 gap-1 rounded-md px-4 h-10 transition duration-200 leading-none"
