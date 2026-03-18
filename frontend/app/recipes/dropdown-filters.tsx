@@ -16,8 +16,6 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
   const [areas, setAreas] = useState<IArea[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // const categories1 = ["All", "Seafood", "Side", "Beef"];
-  // const areas1 = ["All", "American", "British", "Canadian"];
 
   const transformedCategories = categories.map((category) => ({
     value: category.strCategory,
@@ -26,9 +24,16 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
     value: area.strArea,
   }));
 
+  const difficultyOptions = [
+    { value: "All Difficulties" },
+    { value: "Easy" },
+    { value: "Medium" },
+    { value: "Hard" },
+  ];
+
   const updateFilter = (id: string, value: string) => {
     setColumnFilters((prev) => {
-      if (value === "All Areas" || value === "All Categories") {
+      if (value.startsWith("All ")) {
         return prev.filter((filter) => filter.id !== id);
       }
       const existingFilter = prev.find((filter) => filter.id === id);
@@ -45,8 +50,6 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
     const fetchData = async () => {
       try {
         setIsLoading(true);
-
-        // Fetch categories and areas in parallel
         const [fetchedCategories, fetchedAreas] = await Promise.all([
           getCategories(),
           getAreas(),
@@ -73,12 +76,12 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
         <>
             <DropdownFilterSkeleton />
             <DropdownFilterSkeleton />
+            <DropdownFilterSkeleton />
         </>
       ) : error ? (
         <div>Error loading filters, try later.</div>
       ) : (
         <>
-          {/* Category Filter */}
           <div>
             <DropdownFilter
               options={transformedCategories}
@@ -86,12 +89,18 @@ export const DropdownFilters: React.FC<DropdownFiltersProps> = ({
               onFilterChange={(value) => updateFilter("strCategory", value)}
             />
           </div>
-          {/* Area Filter */}
           <div>
             <DropdownFilter
               options={transformedAreas}
               placeholder="All Areas"
               onFilterChange={(value) => updateFilter("strArea", value)}
+            />
+          </div>
+          <div>
+            <DropdownFilter
+              options={difficultyOptions}
+              placeholder="All Difficulties"
+              onFilterChange={(value) => updateFilter("difficulty", value)}
             />
           </div>
         </>
