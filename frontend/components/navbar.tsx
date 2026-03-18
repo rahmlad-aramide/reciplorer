@@ -2,11 +2,14 @@
 import Link from "next/link";
 import logo from "@/assets/placeholder.png";
 import Image from "next/image";
-import { ShoppingBasket, UserRound } from "lucide-react";
+import { ShoppingBasket, UserRound, ShoppingCart, LayoutDashboard, Calendar } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 export const Navbar = () => {
   const pathname = usePathname();
+  const { user } = useUser();
+
   return (
     <header className="shadow fixed top-0 w-full bg-white z-50 h-20 flex my-auto">
       <nav
@@ -30,7 +33,7 @@ export const Navbar = () => {
               Reciplorer
             </Link>
           </div>
-          <div className="hidden md:flex items-center text-xl/normal gap-[50px]">
+          <div className="hidden md:flex items-center text-sm/normal gap-[30px]">
             <Link href="/" className="hover:underline underline-offset-2">
               Home
             </Link>
@@ -40,10 +43,23 @@ export const Navbar = () => {
             >
               Recipes
             </Link>
+            {user && (
+              <>
+                <Link href="/shopping-list" className="hover:underline flex items-center gap-1">
+                  <ShoppingCart size={16} /> List
+                </Link>
+                <Link href="/pantry" className="hover:underline flex items-center gap-1">
+                  <LayoutDashboard size={16} /> Pantry
+                </Link>
+                <Link href="/meal-planner" className="hover:underline flex items-center gap-1">
+                  <Calendar size={16} /> Plans
+                </Link>
+              </>
+            )}
           </div>
           <div className="flex items-center text-sm sm:text-xl/normal gap-[50px]">
             <Link
-              href="/"
+              href={user ? "/profile" : "/login"}
               className="hidden md:flex transition duration-200 hover:scale-110"
             >
               <UserRound />
