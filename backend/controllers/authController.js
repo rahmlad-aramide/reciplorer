@@ -73,7 +73,7 @@ const updateProfile = async (req, res) => {
     }
 
     await user.update({ bio, profilePicture, dietaryRestrictions, preferences });
-    res.json(user);
+    res.json(await user.reload({ attributes: { exclude: ['password'] } }));
   } catch (error) {
     res.status(500).json({ message: 'Error updating profile', error: error.message });
   }
