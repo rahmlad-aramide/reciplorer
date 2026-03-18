@@ -24,7 +24,7 @@ const Recipe = sequelize.define('Recipe', {
     type: DataTypes.STRING,
   },
   difficulty: {
-    type: DataTypes.ENUM('Easy', 'Medium', 'Hard'),
+    type: DataTypes.STRING, // Easy, Medium, Hard
   },
   cookingTime: {
     type: DataTypes.INTEGER, // in minutes

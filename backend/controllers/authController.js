@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-for-dev-only';
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -73,7 +73,7 @@ const updateProfile = async (req, res) => {
     }
 
     await user.update({ bio, profilePicture, dietaryRestrictions, preferences });
-    res.json(await user.reload({ attributes: { exclude: ['password'] } }));
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Error updating profile', error: error.message });
   }
