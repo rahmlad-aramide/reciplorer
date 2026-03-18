@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../context/UserContext';
+import { useUser } from '@/contexts/UserContext';
 
 export default function PantryPage() {
   const { token } = useUser();

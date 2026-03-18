@@ -2,9 +2,15 @@
 import Link from "next/link";
 import logo from "@/assets/placeholder.png";
 import Image from "next/image";
-import { ShoppingBasket, UserRound, ShoppingCart, LayoutDashboard, Calendar } from "lucide-react";
+import {
+  ShoppingBasket,
+  UserRound,
+  ShoppingCart,
+  LayoutDashboard,
+  Calendar,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useUser } from "@/context/UserContext";
+import { useUser } from "@/contexts/UserContext";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -45,13 +51,22 @@ export const Navbar = () => {
             </Link>
             {user && (
               <>
-                <Link href="/shopping-list" className="hover:underline flex items-center gap-1">
+                <Link
+                  href="/shopping-list"
+                  className="hover:underline flex items-center gap-1"
+                >
                   <ShoppingCart size={16} /> List
                 </Link>
-                <Link href="/pantry" className="hover:underline flex items-center gap-1">
+                <Link
+                  href="/pantry"
+                  className="hover:underline flex items-center gap-1"
+                >
                   <LayoutDashboard size={16} /> Pantry
                 </Link>
-                <Link href="/meal-planner" className="hover:underline flex items-center gap-1">
+                <Link
+                  href="/meal-planner"
+                  className="hover:underline flex items-center gap-1"
+                >
                   <Calendar size={16} /> Plans
                 </Link>
               </>

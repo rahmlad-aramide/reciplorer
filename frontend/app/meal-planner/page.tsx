@@ -1,6 +1,6 @@
 "use client";
+import { useUser } from '@/contexts/UserContext';
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../context/UserContext';
 
 export default function MealPlannerPage() {
   const { token } = useUser();
