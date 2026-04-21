@@ -12,6 +12,17 @@ const getShoppingList = async (req, res) => {
 const addShoppingListItem = async (req, res) => {
   const { name, quantity } = req.body;
   try {
+    // Basic de-duplication: check if item exists
+    const existingItem = await ShoppingListItem.findOne({
+      where: { name, userId: req.userId, isPurchased: false }
+    });
+
+    if (existingItem) {
+      // If quantity is numeric, we could add them, but for now just update
+      await existingItem.update({ quantity: `${existingItem.quantity}, ${quantity}` });
+      return res.json(existingItem);
+    }
+
     const item = await ShoppingListItem.create({ name, quantity, userId: req.userId });
     res.status(201).json(item);
   } catch (error) {

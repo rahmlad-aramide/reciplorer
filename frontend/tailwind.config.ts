@@ -13,6 +13,14 @@ export default {
   		colors: {
 			primary: '#1A4D2E',
 			secondary: '#F58700',
+			slate: {
+				50: '#F8FAFC',
+				200: '#E2E8F0',
+				900: '#0F172A',
+			},
+			emerald: {
+				500: '#10B981',
+			},
 			neutral: {
 				100: '#F5F5F5',
 				400: '#8F8E91',

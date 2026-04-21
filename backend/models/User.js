@@ -36,6 +36,16 @@ const User = sequelize.define('User', {
   preferences: {
     type: DataTypes.STRING, // e.g., "vegan,gluten-free"
   },
+  cookingStreak: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  lastCookedAt: {
+    type: DataTypes.DATE,
+  },
+  badges: {
+    type: DataTypes.TEXT, // Store as JSON array string
+  },
 }, {
   timestamps: true,
 });
